@@ -104,8 +104,16 @@ if st.button("Запустить ИИ-Диагностику 🔧", type="primar
                         max_tokens=600
                     )
                     
-                    st.success("Анализ завершен!")
-                    st.markdown(response.choices.message.content)
+                                        st.success("Анализ завершен!")
+                    
+                    # Проверяем формат ответа, чтобы избежать ошибки 'list'
+                    if isinstance(response.choices, list):
+                        ai_text = response.choices[0].message.content
+                    else:
+                        ai_text = response.choices.message.content
+                        
+                    st.markdown(ai_text)
+
                     
                 except Exception as e:
                     st.error(f"Ошибка при обработке запроса: {e}")
