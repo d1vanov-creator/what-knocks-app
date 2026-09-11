@@ -37,7 +37,7 @@ st.markdown('<div class="main-title">«Что стучит?»</div>', unsafe_all
 # 3. Инструкция над строкой ввода
 st.markdown('<div class="input-label">Опишите проблему и модель авто</div>', unsafe_allow_html=True)
 
-# 4. Строка ввода для пользователя (скрываем стандартную метку, так как сделали свою красивую выше)
+# 4. Строка ввода для пользователя
 user_text = st.text_area(
     label="Опишите проблему и модель авто", 
     placeholder="Например: БМВ Х5 Е70, при повороте руля направо появляется глухой стук в районе переднего левого колеса...",
@@ -64,7 +64,7 @@ if st.button("Запустить ИИ-Диагностику 🔧", type="primar
                     # Подключение к прокси-серверу ProxyAPI
                     client = openai.OpenAI(
                         api_key=st.secrets["OPENAI_API_KEY"],
-                        base_url="https://api.proxyapi.ru/v1"
+                        base_url="https://proxyapi.ru"
                     )
                     
                     system_prompt = (
@@ -104,16 +104,14 @@ if st.button("Запустить ИИ-Диагностику 🔧", type="primar
                         max_tokens=600
                     )
                     
-                                        st.success("Анализ завершен!")
-                    
-                    # Проверяем формат ответа, чтобы избежать ошибки 'list'
-                    if isinstance(response.choices, list):
+                    # Безопасное извлечение ответа из ИИ (исправлено)
+                    try:
                         ai_text = response.choices[0].message.content
-                    else:
+                    except:
                         ai_text = response.choices.message.content
-                        
+                    
+                    st.success("Анализ завершен!")
                     st.markdown(ai_text)
-
                     
                 except Exception as e:
                     st.error(f"Ошибка при обработке запроса: {e}")
