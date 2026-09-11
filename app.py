@@ -64,7 +64,7 @@ if st.button("Запустить ИИ-Диагностику 🔧", type="primar
                     # Подключение к прокси-серверу ProxyAPI
                     client = openai.OpenAI(
                         api_key=st.secrets["OPENAI_API_KEY"],
-                        base_url="https://proxyapi.ru"
+                        base_url="https://api.proxyapi.ru/v1"
                     )
                     
                     system_prompt = (
