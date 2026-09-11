@@ -19,9 +19,16 @@ st.markdown("""
         text-align: center;
         margin-bottom: 30px;
     }
-    .input-label { font-size: 18px; font-weight: 500; margin-bottom: 10px; }
+    .input-label { font-size: 18px; font-weight: 500; margin-bottom: 10px; color: #1E1E1E; }
+    /* Делаем текст ответа ИИ контрастным и легко читаемым */
+    .stMarkdown p, .stMarkdown li {
+        color: #212121 !important;
+        font-size: 16px;
+        line-height: 1.6;
+    }
     </style>
 """, unsafe_allow_html=True)
+
 
 # 2. Элементы интерфейса
 st.markdown('<div class="main-title">«Что стучит?»</div>', unsafe_allow_html=True)
